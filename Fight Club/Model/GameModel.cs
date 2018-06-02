@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fight_Club
 {
-    class GameModel
+    class GameModel : IGameModel
     {
-        //const int PlayersAmount=2;
+        const int PlayersAmount=2;
+
         public Player Player1 { get; }
         public Player Player2 { get; }
         private int roundIndex = 0;
@@ -19,24 +20,15 @@ namespace Fight_Club
             Player2 = new Player("Tyler Durden");
         }
 
-        public event EventHandler<EventArgs> Start;
-
-        private void OnStart()
-        {
-            var playerEventArgs = new PlayerEventArgs();
-
-            if (Start != null)
-            {
-                Start(this, new EventArgs());
-            }
-        }
+        public event EventHandler<GameModelEventArgs> Start;
 
         public void StartGame()
         {
-            roundIndex = new Random().Next(1);
-            //StartLog();
+            roundIndex = new Random().Next(0, PlayersAmount);
+            Player1.HealthPoints = Player.MaxHealth;
+            Player2.HealthPoints = Player.MaxHealth;
+            Start?.Invoke(this, new GameModelEventArgs(roundIndex));
         }
-
 
         public void NextStep(BodyPart bodyPart)
         {
