@@ -10,8 +10,8 @@ namespace Fight_Club
     {
         const int PlayersAmount=2;
 
-        public Player Player1 { get; }
-        public Player Player2 { get; }
+        public IPlayer Player1 { get; }
+        public IPlayer Player2 { get; }
         private int roundIndex = 0;
 
         public GameModel(string name)

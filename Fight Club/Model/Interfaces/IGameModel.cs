@@ -9,8 +9,8 @@ namespace Fight_Club
     interface IGameModel
     {
         event EventHandler<GameModelEventArgs> Start;
-        Player Player1 { get; }
-        Player Player2 { get; }
+        IPlayer Player1 { get; }
+        IPlayer Player2 { get; }
 
         void StartGame();
         void NextStep(BodyPart head);

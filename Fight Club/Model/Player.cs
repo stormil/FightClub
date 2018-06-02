@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fight_Club
 {
-    class Player
+    class Player: IPlayer
     {
         public const int MaxHealth = 100;
         private const int DamageHealthPoints = 20;
