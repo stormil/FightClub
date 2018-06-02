@@ -124,7 +124,6 @@
             this.buttonLegs.TabIndex = 15;
             this.buttonLegs.Text = "Legs";
             this.buttonLegs.UseVisualStyleBackColor = false;
-            this.buttonLegs.Click += new System.EventHandler(this.buttonBody_Click);
             // 
             // buttonTorso
             // 
@@ -137,7 +136,7 @@
             this.buttonTorso.TabIndex = 14;
             this.buttonTorso.Text = "Torso";
             this.buttonTorso.UseVisualStyleBackColor = false;
-            this.buttonTorso.Click += new System.EventHandler(this.buttonBody_Click);
+            this.buttonTorso.Click += new System.EventHandler(this.ButtonBody_Click);
             // 
             // buttonHead
             // 
@@ -150,7 +149,7 @@
             this.buttonHead.TabIndex = 13;
             this.buttonHead.Text = "Head";
             this.buttonHead.UseVisualStyleBackColor = false;
-            this.buttonHead.Click += new System.EventHandler(this.buttonBody_Click);
+            this.buttonHead.Click += new System.EventHandler(this.ButtonBody_Click);
             // 
             // pictureBox1
             // 
@@ -197,6 +196,7 @@
             this.Text = "Fight Club";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormFightClub_FormClosing);
             this.Load += new System.EventHandler(this.FormFightClub_Load);
+            this.Click += new System.EventHandler(this.ButtonBody_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

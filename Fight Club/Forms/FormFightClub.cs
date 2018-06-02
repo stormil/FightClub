@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace Fight_Club
 {
-    partial class FormFightClub : Form
+    partial class FormFightClub : Form, IControl
     {
         readonly IGameModel game;
 
-        public FormFightClub(GameModel game)
+        public FormFightClub(IGameModel game)
         {
             InitializeComponent();
             this.game = game;
@@ -23,6 +23,7 @@ namespace Fight_Club
 
         private void FormFightClub_Load(object sender, EventArgs e)
         {
+            // adding subscribers to player and game events
             game.Player1.Wound += WoundLog;
             game.Player1.Wound += LoadPlayer1HealthPoints;
             game.Player2.Wound += WoundLog;
@@ -38,11 +39,13 @@ namespace Fight_Club
 
             game.Start += StartGameLog;
 
-
-            AssignNames();
+            AssignNamesToLabels();
             game.StartGame();
         }
-        private void buttonBody_Click(object sender, EventArgs e)
+
+        #region Controller
+
+        public void ButtonBody_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
             if (button == buttonHead)
@@ -57,10 +60,11 @@ namespace Fight_Club
             {
                 game.NextStep(BodyPart.Legs);
             }
-
         }
 
-        private void AssignNames()
+        #endregion
+
+        private void AssignNamesToLabels()
         {
             labelPlayer1.Text = game.Player1.Name;
             labelPlayer2.Text = game.Player2.Name;

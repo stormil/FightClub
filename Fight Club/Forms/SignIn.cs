@@ -20,10 +20,20 @@ namespace Fight_Club
         private void buttonStartFight_Click(object sender, EventArgs e)
         {
             if ((textBoxName.Text == "") || (textBoxName.Text == " ")) return;
-            var gameModel = new GameModel(textBoxName.Text);
+            IGameModel gameModel = new GameModel(textBoxName.Text);
             var formFightClub = new FormFightClub(gameModel);
             formFightClub.Show();
             Hide();
+        }
+
+        private void textBoxName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonStartFight.PerformClick();
+                e.SuppressKeyPress = true;
+                e.Handled = true;
+            }
         }
     }
 }

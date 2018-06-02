@@ -50,16 +50,17 @@
   <ItemGroup>
     <Compile Include="Control\IControl.cs" />
     <Compile Include="Model\GameModelEventArgs.cs" />
-    <Compile Include="Model\IGameModel.cs" />
-    <Compile Include="Model\BodyPart.cs" />
+    <Compile Include="Model\Interfaces\IGameModel.cs" />
+    <Compile Include="Model\Enums\BodyPart.cs" />
     <Compile Include="Model\Bot.cs" />
-    <Compile Include="Forms\FormGame.cs">
+    <Compile Include="Forms\FormFightClub.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormGame.Designer.cs">
-      <DependentUpon>FormGame.cs</DependentUpon>
+    <Compile Include="Forms\FormFightClub.Designer.cs">
+      <DependentUpon>FormFightClub.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\GameModel.cs" />
+    <Compile Include="Model\Interfaces\IPlayer.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\PlayerEventArgs.cs" />
     <Compile Include="Program.cs" />
@@ -70,8 +71,8 @@
     <Compile Include="Forms\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\FormGame.resx">
-      <DependentUpon>FormGame.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormFightClub.resx">
+      <DependentUpon>FormFightClub.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
