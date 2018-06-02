@@ -55,6 +55,7 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(467, 48);
             this.textBoxName.TabIndex = 1;
+            this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxName_KeyDown);
             // 
             // buttonStartFight
             // 
