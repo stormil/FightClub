@@ -71,6 +71,7 @@
     <Compile Include="Forms\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\IView.cs" />
     <EmbeddedResource Include="Forms\FormFightClub.resx">
       <DependentUpon>FormFightClub.cs</DependentUpon>
     </EmbeddedResource>

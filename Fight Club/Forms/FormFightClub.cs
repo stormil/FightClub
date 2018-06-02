@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Fight_Club
 {
-    partial class FormFightClub : Form, IControl
+    partial class FormFightClub : Form, IControl, IView
     {
         readonly IGameModel game;
 
@@ -70,7 +70,7 @@ namespace Fight_Club
             labelPlayer2.Text = game.Player2.Name;
         }
 
-        private void RequestNewGameStart(object sender, PlayerEventArgs e)
+        public void RequestNewGameStart(object sender, PlayerEventArgs e)
         {
             var result1 = MessageBox.Show("Do you want to start a new game?",
                 "New Game",
@@ -92,7 +92,7 @@ namespace Fight_Club
 
         #region Logs
 
-        void StartGameLog(object sender, GameModelEventArgs e)
+        public void StartGameLog(object sender, GameModelEventArgs e)
         {
             richTextBoxLog.Clear();
             richTextBoxLog.AppendText("Start the Fight!\n");
@@ -101,23 +101,23 @@ namespace Fight_Club
                 : "Second player attacks!\n");
         }
 
-        void WoundLog(object sender, PlayerEventArgs e)
+        public void WoundLog(object sender, PlayerEventArgs e)
         {
             richTextBoxLog.AppendText(e.Name + " is wounded!\nNext player attacks... ");
         }
 
-        void LoadPlayer1HealthPoints(object sender, PlayerEventArgs e)
+        public void LoadPlayer1HealthPoints(object sender, PlayerEventArgs e)
         {
             progressBarPlayer1.Value = e.HealthPoints;
             labelHpPlayer1.Text = "HP:" + e.HealthPoints;
         }
-        void LoadPlayer2HealthPoints(object sender, PlayerEventArgs e)
+        public void LoadPlayer2HealthPoints(object sender, PlayerEventArgs e)
         {
             progressBarPlayer2.Value = e.HealthPoints;
             labelHpPlayer2.Text = "HP:" + e.HealthPoints;
         }
 
-        void DeathLog(object sender, PlayerEventArgs e)
+        public void DeathLog(object sender, PlayerEventArgs e)
         {
             richTextBoxLog.AppendText(e.Name + " is dead!\n");
             buttonHead.Enabled = false;
@@ -125,7 +125,7 @@ namespace Fight_Club
             buttonLegs.Enabled = false;
         }
 
-        void BlockLog(object sender, PlayerEventArgs e)
+        public void BlockLog(object sender, PlayerEventArgs e)
         {
             richTextBoxLog.AppendText(e.Name + " blocked the punch!\nNext player attacks... ");
         }
