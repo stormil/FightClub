@@ -124,6 +124,7 @@
             this.buttonLegs.TabIndex = 15;
             this.buttonLegs.Text = "Legs";
             this.buttonLegs.UseVisualStyleBackColor = false;
+            this.buttonLegs.Click += new System.EventHandler(this.ButtonBody_Click);
             // 
             // buttonTorso
             // 
