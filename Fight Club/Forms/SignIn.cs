@@ -19,13 +19,11 @@ namespace Fight_Club
 
         private void buttonStartFight_Click(object sender, EventArgs e)
         {
-            if ((textBoxName.Text != "") && (textBoxName.Text != " "))
-            {
-                var gameModel = new GameModel(textBoxName.Text);
-                var formFightClub = new FormFightClub(gameModel);
-                formFightClub.Show();
-                this.Hide();
-            }
+            if ((textBoxName.Text == "") || (textBoxName.Text == " ")) return;
+            var gameModel = new GameModel(textBoxName.Text);
+            var formFightClub = new FormFightClub(gameModel);
+            formFightClub.Show();
+            Hide();
         }
     }
 }

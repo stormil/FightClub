@@ -13,7 +13,7 @@ namespace Fight_Club
 {
     partial class FormFightClub : Form
     {
-        readonly GameModel game;
+        readonly IGameModel game;
 
         public FormFightClub(GameModel game)
         {
@@ -31,10 +31,13 @@ namespace Fight_Club
             game.Player2.Death += DeathLog;
             game.Player1.Death += LoadPlayer1HealthPoints;
             game.Player2.Death += LoadPlayer2HealthPoints;
+            game.Player1.Death += RequestNewGameStart;
+            game.Player2.Death += RequestNewGameStart;
             game.Player1.Block += BlockLog;
             game.Player2.Block += BlockLog;
 
-            // game.Start += (sender, args) => StartGameLog();
+            game.Start += StartGameLog;
+
 
             AssignNames();
             game.StartGame();
@@ -54,83 +57,65 @@ namespace Fight_Club
             {
                 game.NextStep(BodyPart.Legs);
             }
-           
+
         }
 
-        //private void buttonHeadPlayer1_Click(object sender, EventArgs e)
-        //{
-        //    if (roundIndex % 2 == 0)
-        //    {
-        //        player1.Blocked = BodyPart.Head;
-        //        player1.GetHit(Bot.choseBodyPart());
-        //    }
-        //    else
-        //    {
-        //        player2.Blocked = Bot.choseBodyPart();
-        //        player2.GetHit(BodyPart.Head);
-        //    }
-        //}
-
-        //private void buttonTorsoPlayer1_Click(object sender, EventArgs e)
-        //{
-        //    if (roundIndex % 2 == 0)
-        //    {
-        //        player1.Blocked = BodyPart.Torso;
-        //        player1.GetHit(Bot.choseBodyPart());
-        //    }
-        //    else
-        //    {
-        //        player2.Blocked = Bot.choseBodyPart();
-        //        player2.GetHit(BodyPart.Torso);
-        //    }
-        //}
-
-        //private void buttonLegsPlayer1_Click(object sender, EventArgs e)
-        //{
-        //    if (roundIndex % 2 == 0)
-        //    {
-        //        player1.Blocked = BodyPart.Legs;
-        //        player1.GetHit(Bot.choseBodyPart());
-        //    }
-        //    else
-        //    {
-        //        player2.Blocked = Bot.choseBodyPart();
-        //        player2.GetHit(BodyPart.Legs);
-        //    }
-        //}
         private void AssignNames()
         {
             labelPlayer1.Text = game.Player1.Name;
             labelPlayer2.Text = game.Player2.Name;
         }
 
-        void StartGameLog(int roundIndex)
+        private void RequestNewGameStart(object sender, PlayerEventArgs e)
         {
+            var result1 = MessageBox.Show("Do you want to start a new game?",
+                "New Game",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (result1 == DialogResult.Yes)
+            {
+                ResetButtons();
+                game.StartGame();
+            }
+        }
+
+        private void ResetButtons()
+        {
+            buttonHead.Enabled = true;
+            buttonTorso.Enabled = true;
+            buttonLegs.Enabled = true;
+        }
+
+        #region Logs
+
+        void StartGameLog(object sender, GameModelEventArgs e)
+        {
+            richTextBoxLog.Clear();
             richTextBoxLog.AppendText("Start the Fight!\n");
-            richTextBoxLog.AppendText(roundIndex % 2 == 0
+            richTextBoxLog.AppendText(e.RoundIndex % 2 == 0
                 ? "First player attacks!\n"
                 : "Second player attacks!\n");
         }
 
         void WoundLog(object sender, PlayerEventArgs e)
         {
-            richTextBoxLog.AppendText(e.name + " is wounded!\n Next player attacks: ");
+            richTextBoxLog.AppendText(e.Name + " is wounded!\nNext player attacks... ");
         }
 
         void LoadPlayer1HealthPoints(object sender, PlayerEventArgs e)
         {
-            progressBarPlayer1.Value = e.healthPoints;
-            labelHpPlayer1.Text = "HP:" + e.healthPoints;
+            progressBarPlayer1.Value = e.HealthPoints;
+            labelHpPlayer1.Text = "HP:" + e.HealthPoints;
         }
         void LoadPlayer2HealthPoints(object sender, PlayerEventArgs e)
         {
-            progressBarPlayer2.Value = e.healthPoints;
-            labelHpPlayer2.Text = "HP:" + e.healthPoints;
+            progressBarPlayer2.Value = e.HealthPoints;
+            labelHpPlayer2.Text = "HP:" + e.HealthPoints;
         }
 
         void DeathLog(object sender, PlayerEventArgs e)
         {
-            richTextBoxLog.AppendText(e.name + " is dead!\n");
+            richTextBoxLog.AppendText(e.Name + " is dead!\n");
             buttonHead.Enabled = false;
             buttonTorso.Enabled = false;
             buttonLegs.Enabled = false;
@@ -138,14 +123,15 @@ namespace Fight_Club
 
         void BlockLog(object sender, PlayerEventArgs e)
         {
-            richTextBoxLog.AppendText(e.name + " blocked the punch!\n Next player attacks: ");
+            richTextBoxLog.AppendText(e.Name + " blocked the punch!\nNext player attacks... ");
         }
-
 
         private void richTextBoxLog_TextChanged(object sender, EventArgs e)
         {
             richTextBoxLog.ScrollToCaret();
         }
+
+        #endregion
 
         private void FormFightClub_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -153,9 +139,3 @@ namespace Fight_Club
         }
     }
 }
-
-// Make type of the player (bot or human)
-// Make sizable style
-// Create an tools for making 2+ players
-// Move Log functions to new file
-// Create nor opportunities (showing HP minus, starting new game)

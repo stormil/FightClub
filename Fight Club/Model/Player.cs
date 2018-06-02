@@ -8,9 +8,12 @@ namespace Fight_Club
 {
     class Player
     {
+        public const int MaxHealth = 100;
+        private const int DamageHealthPoints = 20;
+
         private BodyPart blocked;
-        private int healthPoints = 100;
-        private string name;
+        private int healthPoints;
+        private readonly string name;
 
         public Player(string name)
         {
@@ -21,59 +24,32 @@ namespace Fight_Club
 
         private void OnWound()
         {
-            var playerEventArgs = new PlayerEventArgs();
-
-            if (Wound != null)
-            {
-                playerEventArgs.name = this.Name;
-                playerEventArgs.healthPoints = this.HealthPoints;
-                Wound(this, playerEventArgs);
-            }
+            Wound?.Invoke(this, new PlayerEventArgs(Name, healthPoints));
         }
 
         public event EventHandler<PlayerEventArgs> Block;
 
         private void OnBlock()
         {
-            var playerEventArgs = new PlayerEventArgs();
-
-            if (Block != null)
-            {
-                playerEventArgs.name = this.Name;
-                playerEventArgs.healthPoints = this.HealthPoints;
-                Block(this, playerEventArgs);
-            }
+            Block?.Invoke(this, new PlayerEventArgs(Name, healthPoints));
         }
 
         public event EventHandler<PlayerEventArgs> Death;
 
         private void OnDeath()
         {
-            var playerEventArgs = new PlayerEventArgs();
-
-            if (Death != null)
-            {
-                playerEventArgs.name = this.Name;
-                playerEventArgs.healthPoints = this.HealthPoints;
-                Death(this, playerEventArgs);
-            }
+            Death?.Invoke(this, new PlayerEventArgs(Name, healthPoints));
         }
 
         public BodyPart Blocked
         {
-            get
-            {
-                return blocked;
-            }
+            get => blocked;
             set => blocked = value;
         }
 
         public int HealthPoints
         {
-            get
-            {
-                return healthPoints;
-            }
+            get => healthPoints;
             set
             {
                 if (value <= 0)
@@ -89,10 +65,7 @@ namespace Fight_Club
             }
         }
 
-        public string Name
-        {
-            get => name;
-        }
+        public string Name => name;
 
         public void GetHit(BodyPart targetBodyPart)
         {
@@ -102,11 +75,8 @@ namespace Fight_Club
             }
             else
             {
-                HealthPoints = HealthPoints - 20;
+                HealthPoints = HealthPoints - DamageHealthPoints;
             }
         }
     }
 }
-
-// idea: do everything in FC style
-// idea: do everything useing MVC

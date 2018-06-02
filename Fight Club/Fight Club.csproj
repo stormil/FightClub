@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\IControl.cs" />
+    <Compile Include="Model\GameModelEventArgs.cs" />
     <Compile Include="Model\IGameModel.cs" />
     <Compile Include="Model\BodyPart.cs" />
     <Compile Include="Model\Bot.cs" />
