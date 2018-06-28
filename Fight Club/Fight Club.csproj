@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\Controller.cs" />
     <Compile Include="Control\IControl.cs" />
+    <Compile Include="Model\Interfaces\IModelObserver.cs" />
     <Compile Include="Model\GameModelEventArgs.cs" />
     <Compile Include="Model\Interfaces\IGameModel.cs" />
     <Compile Include="Model\Enums\BodyPart.cs" />
@@ -61,6 +63,12 @@
     </Compile>
     <Compile Include="Model\GameModel.cs" />
     <Compile Include="Model\Interfaces\IPlayer.cs" />
+    <Compile Include="Forms\Log.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Log.Designer.cs">
+      <DependentUpon>Log.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\PlayerEventArgs.cs" />
     <Compile Include="Program.cs" />
@@ -72,6 +80,7 @@
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
     <Compile Include="View\IView.cs" />
+    <Compile Include="View\ViewEventArgs.cs" />
     <EmbeddedResource Include="Forms\FormFightClub.resx">
       <DependentUpon>FormFightClub.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,8 +16,8 @@ namespace Fight_Club
 
         public GameModel(string name)
         {
-            Player1 = new Player(name);
-            Player2 = new Player("Tyler Durden");
+            Player1 = new Player(name, 0);
+            Player2 = new Player("Tyler Durden", 1);
         }
 
         public event EventHandler<GameModelEventArgs> Start;
@@ -44,5 +44,23 @@ namespace Fight_Club
                 Player2.GetHit(bodyPart);
             }
         }
+
+        public void AddObserver(IView view)
+        {
+            Player1.AddObserver(view);
+            Player2.AddObserver(view);
+            Start += view.StartGameLog;
+        }
+
+        public void RemoveObserver(IView view)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyObservers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+// make game for n players

@@ -14,31 +14,33 @@ namespace Fight_Club
         private BodyPart blocked;
         private int healthPoints;
         private readonly string name;
+        public int Id { get; }
 
-        public Player(string name)
+        public Player(string name, int id)
         {
             this.name = name;
+            this.Id = id;
         }
 
         public event EventHandler<PlayerEventArgs> Wound;
 
         private void OnWound()
         {
-            Wound?.Invoke(this, new PlayerEventArgs(Name, healthPoints));
+            Wound?.Invoke(this, new PlayerEventArgs(Name, Id, healthPoints));
         }
 
         public event EventHandler<PlayerEventArgs> Block;
 
         private void OnBlock()
         {
-            Block?.Invoke(this, new PlayerEventArgs(Name, healthPoints));
+            Block?.Invoke(this, new PlayerEventArgs(Name, Id, healthPoints));
         }
 
         public event EventHandler<PlayerEventArgs> Death;
 
         private void OnDeath()
         {
-            Death?.Invoke(this, new PlayerEventArgs(Name, healthPoints));
+            Death?.Invoke(this, new PlayerEventArgs(Name, Id, healthPoints));
         }
 
         public BodyPart Blocked
@@ -77,6 +79,16 @@ namespace Fight_Club
             {
                 HealthPoints = HealthPoints - DamageHealthPoints;
             }
+        }
+
+        public void AddObserver(IView view)
+        {
+            Wound += view.WoundLog;
+            Wound += view.LoadPlayerHealthPoints;
+            Death += view.DeathLog;
+            Death += view.LoadPlayerHealthPoints;
+            Death += view.RequestNewGameStart;
+            Block += view.BlockLog;
         }
     }
 }

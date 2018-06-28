@@ -8,13 +8,15 @@ namespace Fight_Club
 {
     class PlayerEventArgs: EventArgs
     {
-        public PlayerEventArgs(string name, int healthPoints)
+        public PlayerEventArgs(string name, int id, int healthPoints)
         {
             Name = name;
+            Id = id;
             HealthPoints = healthPoints;
         }
 
         public string Name { get; }
         public int HealthPoints { get; }
+        public int Id { get; }
     }
 }

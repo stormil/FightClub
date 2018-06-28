@@ -60,16 +60,16 @@
             this.labelPlayer1.Name = "labelPlayer1";
             this.labelPlayer1.Size = new System.Drawing.Size(405, 43);
             this.labelPlayer1.TabIndex = 4;
-            this.labelPlayer1.Text = "Tyler Durden";
+            this.labelPlayer1.Text = "Player 1";
             // 
             // labelPlayer2
             // 
             this.labelPlayer2.Font = new System.Drawing.Font("Showcard Gothic", 19.8F);
-            this.labelPlayer2.Location = new System.Drawing.Point(568, 5);
+            this.labelPlayer2.Location = new System.Drawing.Point(761, 5);
             this.labelPlayer2.Name = "labelPlayer2";
-            this.labelPlayer2.Size = new System.Drawing.Size(401, 43);
+            this.labelPlayer2.Size = new System.Drawing.Size(171, 43);
             this.labelPlayer2.TabIndex = 5;
-            this.labelPlayer2.Text = "The Narrator";
+            this.labelPlayer2.Text = "Player 2";
             // 
             // richTextBoxLog
             // 
@@ -196,7 +196,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fight Club";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormFightClub_FormClosing);
-            this.Load += new System.EventHandler(this.FormFightClub_Load);
             this.Click += new System.EventHandler(this.ButtonBody_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

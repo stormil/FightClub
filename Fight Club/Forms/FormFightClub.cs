@@ -11,63 +11,33 @@ using System.Windows.Forms;
 
 namespace Fight_Club
 {
-    partial class FormFightClub : Form, IControl, IView
+    partial class FormFightClub : Form, IView
     {
-        readonly IGameModel game;
+        public delegate void ViewHandler<IView>(IView sender, ViewEventArgs e);
 
-        public FormFightClub(IGameModel game)
+        IControl controller;
+        public event EventHandler<IView> changed;
+
+        public FormFightClub()
         {
             InitializeComponent();
-            this.game = game;
         }
-
-        private void FormFightClub_Load(object sender, EventArgs e)
-        {
-            // adding subscribers to player and game events
-            game.Player1.Wound += WoundLog;
-            game.Player1.Wound += LoadPlayer1HealthPoints;
-            game.Player2.Wound += WoundLog;
-            game.Player2.Wound += LoadPlayer2HealthPoints;
-            game.Player1.Death += DeathLog;
-            game.Player2.Death += DeathLog;
-            game.Player1.Death += LoadPlayer1HealthPoints;
-            game.Player2.Death += LoadPlayer2HealthPoints;
-            game.Player1.Death += RequestNewGameStart;
-            game.Player2.Death += RequestNewGameStart;
-            game.Player1.Block += BlockLog;
-            game.Player2.Block += BlockLog;
-
-            game.Start += StartGameLog;
-
-            AssignNamesToLabels();
-            game.StartGame();
-        }
-
-        #region Controller
 
         public void ButtonBody_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
             if (button == buttonHead)
             {
-                game.NextStep(BodyPart.Head);
+                controller.GetBodyPart(BodyPart.Head);
             }
             else if (button == buttonTorso)
             {
-                game.NextStep(BodyPart.Torso);
+                controller.GetBodyPart(BodyPart.Torso);
             }
             else if (button == buttonLegs)
             {
-                game.NextStep(BodyPart.Legs);
+                controller.GetBodyPart(BodyPart.Legs);
             }
-        }
-
-        #endregion
-
-        private void AssignNamesToLabels()
-        {
-            labelPlayer1.Text = game.Player1.Name;
-            labelPlayer2.Text = game.Player2.Name;
         }
 
         public void RequestNewGameStart(object sender, PlayerEventArgs e)
@@ -79,7 +49,7 @@ namespace Fight_Club
             if (result1 == DialogResult.Yes)
             {
                 ResetButtons();
-                game.StartGame();
+                controller.StartNewGame();
             }
         }
 
@@ -106,15 +76,21 @@ namespace Fight_Club
             richTextBoxLog.AppendText(e.Name + " is wounded!\nNext player attacks... ");
         }
 
-        public void LoadPlayer1HealthPoints(object sender, PlayerEventArgs e)
+        public void LoadPlayerHealthPoints(object sender, PlayerEventArgs e)
         {
-            progressBarPlayer1.Value = e.HealthPoints;
-            labelHpPlayer1.Text = "HP:" + e.HealthPoints;
-        }
-        public void LoadPlayer2HealthPoints(object sender, PlayerEventArgs e)
-        {
-            progressBarPlayer2.Value = e.HealthPoints;
-            labelHpPlayer2.Text = "HP:" + e.HealthPoints;
+            switch (e.Id)
+            {
+                case 0:
+                    progressBarPlayer1.Value = e.HealthPoints;
+                    labelHpPlayer1.Text = "HP:" + e.HealthPoints;
+                    break;
+                case 1:
+                    progressBarPlayer2.Value = e.HealthPoints;
+                    labelHpPlayer2.Text = "HP:" + e.HealthPoints;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void DeathLog(object sender, PlayerEventArgs e)
@@ -140,6 +116,11 @@ namespace Fight_Club
         private void FormFightClub_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        public void SetController(IControl controller)
+        {
+            this.controller = controller;
         }
     }
 }

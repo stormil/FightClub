@@ -8,6 +8,7 @@ namespace Fight_Club
 {
     interface IControl
     {
-        void ButtonBody_Click(object sender, EventArgs e);
+        void GetBodyPart(BodyPart part);
+        void StartNewGame();
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Fight_Club.Control;
 
 namespace Fight_Club
 {
@@ -20,8 +21,9 @@ namespace Fight_Club
         private void buttonStartFight_Click(object sender, EventArgs e)
         {
             if ((textBoxName.Text == "") || (textBoxName.Text == " ")) return;
+            var formFightClub = new FormFightClub();
             IGameModel gameModel = new GameModel(textBoxName.Text);
-            var formFightClub = new FormFightClub(gameModel);
+            IControl controller = new Controller(formFightClub, gameModel);
             formFightClub.Show();
             Hide();
         }
