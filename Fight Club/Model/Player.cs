@@ -81,14 +81,18 @@ namespace Fight_Club
             }
         }
 
-        public void AddObserver(IView view)
+        public void AddPlayerObserver(IViewPlayer viewPlayer)
         {
-            Wound += view.WoundLog;
-            Wound += view.LoadPlayerHealthPoints;
-            Death += view.DeathLog;
-            Death += view.LoadPlayerHealthPoints;
-            Death += view.RequestNewGameStart;
-            Block += view.BlockLog;
+            Wound += viewPlayer.LoadPlayerHealthPoints;
+            Death += viewPlayer.LoadPlayerHealthPoints;
+            Death += viewPlayer.RequestNewGameStart;
+        }
+
+        public void AddLogObserver(IViewLog viewLog)
+        {
+            Wound += viewLog.WoundLog;
+            Block += viewLog.BlockLog;
+            Death += viewLog.DeathLog;
         }
     }
 }

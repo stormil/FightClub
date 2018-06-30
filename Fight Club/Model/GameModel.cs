@@ -45,22 +45,13 @@ namespace Fight_Club
             }
         }
 
-        public void AddObserver(IView view)
+        public void AddObservers(IViewPlayer viewPlayer1, IViewPlayer viewPlayer2, IViewLog viewLog)
         {
-            Player1.AddObserver(view);
-            Player2.AddObserver(view);
-            Start += view.StartGameLog;
-        }
-
-        public void RemoveObserver(IView view)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void NotifyObservers()
-        {
-            throw new NotImplementedException();
+            Player1.AddPlayerObserver(viewPlayer1);
+            Player2.AddPlayerObserver(viewPlayer2);
+            Player1.AddLogObserver(viewLog);
+            Player2.AddLogObserver(viewLog);
+            Start += viewLog.StartGameLog;
         }
     }
 }
-// make game for n players

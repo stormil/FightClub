@@ -15,8 +15,6 @@ namespace Fight_Club
         void StartGame();
         void NextStep(BodyPart head);
 
-        void AddObserver(IView view);
-        void RemoveObserver(IView view);
-        void NotifyObservers();
+        void AddObservers(IViewPlayer viewPlayer1, IViewPlayer viewPlayer2, IViewLog viewLog);
     }
 }

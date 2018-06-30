@@ -15,6 +15,7 @@ namespace Fight_Club
         BodyPart Blocked { get; set; }
         string Name { get; }
         void GetHit(BodyPart choseBodyPart);
-        void AddObserver(IView view);
+        void AddPlayerObserver(IViewPlayer viewPlayer);
+        void AddLogObserver(IViewLog viewLog);
     }
 }

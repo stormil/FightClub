@@ -13,7 +13,6 @@ namespace Fight_Club
 {
     partial class FormFightClub : Form, IView
     {
-        public delegate void ViewHandler<IView>(IView sender, ViewEventArgs e);
 
         IControl controller;
         public event EventHandler<IView> changed;

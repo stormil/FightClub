@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Fight_Club
 {
-    interface IView
+    interface IModelObserver
     {
-        void SetController(IControl controller);
+        void modelChanged(IGameModel model, GameModelEventArgs e);
     }
 }

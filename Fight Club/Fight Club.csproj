@@ -50,6 +50,12 @@
   <ItemGroup>
     <Compile Include="Control\Controller.cs" />
     <Compile Include="Control\IControl.cs" />
+    <Compile Include="Forms\FormPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPlayer.Designer.cs">
+      <DependentUpon>FormPlayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Interfaces\IModelObserver.cs" />
     <Compile Include="Model\GameModelEventArgs.cs" />
     <Compile Include="Model\Interfaces\IGameModel.cs" />
@@ -80,9 +86,16 @@
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
     <Compile Include="View\IView.cs" />
-    <Compile Include="View\ViewEventArgs.cs" />
+    <Compile Include="View\IViewLog.cs" />
+    <Compile Include="View\IViewPlayer.cs" />
     <EmbeddedResource Include="Forms\FormFightClub.resx">
       <DependentUpon>FormFightClub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPlayer.resx">
+      <DependentUpon>FormPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Log.resx">
+      <DependentUpon>Log.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
