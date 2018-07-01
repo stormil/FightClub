@@ -10,23 +10,25 @@ namespace Fight_Club
     {
         const int PlayersAmount=2;
 
+        public IPlayer Player0 { get; }
         public IPlayer Player1 { get; }
-        public IPlayer Player2 { get; }
         private int roundIndex = 0;
 
         public GameModel(string name)
         {
-            Player1 = new Player(name, 0);
-            Player2 = new Player("Tyler Durden", 1);
+            Player0 = new Player(name, 0);
+            Player1 = new Player("Tyler Durden", 1);
         }
 
         public event EventHandler<GameModelEventArgs> Start;
+        public event EventHandler<GameModelEventArgs> NextTurn;
 
         public void StartGame()
         {
             roundIndex = new Random().Next(0, PlayersAmount);
+            if (roundIndex%2==1) NextTurn?.Invoke(this, new GameModelEventArgs(roundIndex));
+            Player0.HealthPoints = Player.MaxHealth;
             Player1.HealthPoints = Player.MaxHealth;
-            Player2.HealthPoints = Player.MaxHealth;
             Start?.Invoke(this, new GameModelEventArgs(roundIndex));
         }
 
@@ -35,23 +37,26 @@ namespace Fight_Club
             roundIndex++;
             if (roundIndex % 2 == 0)
             {
-                Player1.Blocked = bodyPart;
-                Player1.GetHit(Bot.choseBodyPart());
+                Player0.Blocked = bodyPart;
+                Player0.GetHit(Bot.choseBodyPart());
             }
             else
             {
-                Player2.Blocked = Bot.choseBodyPart();
-                Player2.GetHit(bodyPart);
+                Player1.Blocked = Bot.choseBodyPart();
+                Player1.GetHit(bodyPart);
             }
+            NextTurn?.Invoke(this, new GameModelEventArgs(roundIndex));
         }
 
-        public void AddObservers(IViewPlayer viewPlayer1, IViewPlayer viewPlayer2, IViewLog viewLog)
+        public void AddObservers(IViewPlayer viewPlayer0, IViewPlayer viewPlayer1, IViewLog viewLog)
         {
-            Player1.AddPlayerObserver(viewPlayer1);
-            Player2.AddPlayerObserver(viewPlayer2);
+            Player0.AddLogObserver(viewLog);
             Player1.AddLogObserver(viewLog);
-            Player2.AddLogObserver(viewLog);
+            Player0.AddPlayerObserver(viewPlayer0);
+            Player1.AddPlayerObserver(viewPlayer1);
             Start += viewLog.StartGameLog;
+            NextTurn += viewPlayer0.SwitchControls;
+            NextTurn += viewPlayer1.SwitchControls;
         }
     }
 }

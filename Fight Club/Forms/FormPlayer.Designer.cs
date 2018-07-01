@@ -44,7 +44,7 @@
             this.buttonLegs.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonLegs.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonLegs.Font = new System.Drawing.Font("Impact", 16.2F);
-            this.buttonLegs.Location = new System.Drawing.Point(350, 428);
+            this.buttonLegs.Location = new System.Drawing.Point(370, 428);
             this.buttonLegs.Name = "buttonLegs";
             this.buttonLegs.Size = new System.Drawing.Size(100, 100);
             this.buttonLegs.TabIndex = 21;
@@ -57,7 +57,7 @@
             this.buttonTorso.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonTorso.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonTorso.Font = new System.Drawing.Font("Impact", 16.2F);
-            this.buttonTorso.Location = new System.Drawing.Point(350, 297);
+            this.buttonTorso.Location = new System.Drawing.Point(370, 301);
             this.buttonTorso.Name = "buttonTorso";
             this.buttonTorso.Size = new System.Drawing.Size(100, 100);
             this.buttonTorso.TabIndex = 19;
@@ -70,7 +70,7 @@
             this.buttonHead.BackColor = System.Drawing.Color.WhiteSmoke;
             this.buttonHead.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonHead.Font = new System.Drawing.Font("Impact", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonHead.Location = new System.Drawing.Point(350, 164);
+            this.buttonHead.Location = new System.Drawing.Point(370, 161);
             this.buttonHead.Name = "buttonHead";
             this.buttonHead.Size = new System.Drawing.Size(100, 100);
             this.buttonHead.TabIndex = 18;
@@ -102,7 +102,7 @@
             // 
             this.progressBarPlayer1.Location = new System.Drawing.Point(12, 55);
             this.progressBarPlayer1.Name = "progressBarPlayer1";
-            this.progressBarPlayer1.Size = new System.Drawing.Size(438, 43);
+            this.progressBarPlayer1.Size = new System.Drawing.Size(458, 43);
             this.progressBarPlayer1.TabIndex = 16;
             this.progressBarPlayer1.Value = 100;
             // 
@@ -110,9 +110,9 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 164);
+            this.pictureBox1.Location = new System.Drawing.Point(19, 146);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(325, 379);
+            this.pictureBox1.Size = new System.Drawing.Size(336, 382);
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
             // 
@@ -121,7 +121,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(471, 555);
+            this.ClientSize = new System.Drawing.Size(482, 553);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buttonLegs);
             this.Controls.Add(this.buttonTorso);
@@ -135,6 +135,7 @@
             this.MinimizeBox = false;
             this.Name = "FormPlayer";
             this.Text = "FormPlayer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPlayer_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

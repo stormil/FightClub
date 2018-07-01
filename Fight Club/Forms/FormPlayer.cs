@@ -12,30 +12,47 @@ namespace Fight_Club
 {
     partial class FormPlayer : Form, IViewPlayer
     {
+        IControl controller;
+
         public FormPlayer(int id)
         {
             InitializeComponent();
-            labelPlayer1.Text = "Player " + id;
+            labelPlayer1.Text = "Player " + (id+1);
+            this.Text = "Player " + (id+1);
+            var height = (Screen.PrimaryScreen.Bounds.Height / 2) - 350;
+            switch (id)
+            {
+                case 0:
+                    this.StartPosition = FormStartPosition.Manual;
+                    this.Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - 400, height);
+                    break;
+                case 1:
+                    this.StartPosition = FormStartPosition.Manual;
+                    this.Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - 30, height);
+                    SwitchControls(this, new GameModelEventArgs(0));
+                    break;
+                default:
+                    break;
+            }
         }
 
-        IControl controller;
-        public event EventHandler<IView> changed;
-
-        public void ButtonBody_Click(object sender, EventArgs e)
+        private void ButtonBody_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
+            BodyPart chosenBodyPart;
             if (button == buttonHead)
             {
-                controller.GetBodyPart(BodyPart.Head);
+                chosenBodyPart = BodyPart.Head;
             }
             else if (button == buttonTorso)
             {
-                controller.GetBodyPart(BodyPart.Torso);
+                chosenBodyPart = BodyPart.Torso;
             }
-            else if (button == buttonLegs)
+            else 
             {
-                controller.GetBodyPart(BodyPart.Legs);
+                chosenBodyPart = BodyPart.Legs;
             }
+            controller.GetBodyPart(chosenBodyPart);
         }
 
         public void RequestNewGameStart(object sender, PlayerEventArgs e)
@@ -64,21 +81,21 @@ namespace Fight_Club
             labelHpPlayer1.Text = "HP:" + e.HealthPoints;
         }
 
-        private void SwitchControls()
+        public void SwitchControls(object sender, GameModelEventArgs e)
         {
             buttonHead.Enabled = buttonHead.Enabled != true;
             buttonTorso.Enabled = buttonTorso.Enabled != true;
             buttonLegs.Enabled = buttonLegs.Enabled != true;
         }
 
-        private void NextRound()
-        {
-
-        }
-
         public void SetController(IControl controller)
         {
             this.controller = controller;
+        }
+
+        private void FormPlayer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

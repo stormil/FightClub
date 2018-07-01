@@ -22,8 +22,8 @@ namespace Fight_Club
             if ((textBoxName.Text == "") || (textBoxName.Text == " ")) return;
             //var formFightClub = new FormFightClub();
             var formLog = new Log();
-            var formPlayer1 = new FormPlayer(1);
-            var formPlayer2 = new FormPlayer(2);
+            var formPlayer1 = new FormPlayer(0);
+            var formPlayer2 = new FormPlayer(1);
             IGameModel gameModel = new GameModel(textBoxName.Text);
             IControl controller = new Controller(formPlayer1,formPlayer2, formLog, gameModel);
             formPlayer1.Show();

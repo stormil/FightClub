@@ -10,5 +10,6 @@ namespace Fight_Club
     {
         void RequestNewGameStart(object sender, PlayerEventArgs e);
         void LoadPlayerHealthPoints(object sender, PlayerEventArgs e);
+        void SwitchControls(object sender, GameModelEventArgs e);
     }
 }

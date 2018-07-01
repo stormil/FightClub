@@ -17,6 +17,9 @@ namespace Fight_Club
         public Log()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - 400,
+                (Screen.PrimaryScreen.Bounds.Height / 2) + 140);
         }
 
         public void StartGameLog(object sender, GameModelEventArgs e)
@@ -46,6 +49,11 @@ namespace Fight_Club
         public void SetController(IControl controller)
         {
             this.controller = controller;
+        }
+
+        private void richTextBoxLog_TextChanged(object sender, EventArgs e)
+        {
+            richTextBoxLog.ScrollToCaret();
         }
     }
 }
