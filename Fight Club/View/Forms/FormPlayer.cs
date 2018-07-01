@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,19 +18,27 @@ namespace Fight_Club
         public FormPlayer(int id)
         {
             InitializeComponent();
-            labelPlayer1.Text = "Player " + (id+1);
-            this.Text = "Player " + (id+1);
+            this.Text = "Player " + (id + 1);
+            string path = Environment.CurrentDirectory;
+            string directory = Path.GetFullPath(Path.Combine(path, @"..\..\"));
             var height = (Screen.PrimaryScreen.Bounds.Height / 2) - 350;
+            pictureBoxPlayer.SizeMode = PictureBoxSizeMode.Zoom;
             switch (id)
             {
                 case 0:
+                    labelPlayer1.Text = "You";
+                    pictureBoxPlayer.Image = Image.FromFile(directory + "\\Resources\\Narrator.png");
+                    labelInstruction.Text = "Set block on:";
                     this.StartPosition = FormStartPosition.Manual;
                     this.Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - 400, height);
+                    SwitchControls(this, new EventArgs());
                     break;
                 case 1:
+                    labelPlayer1.Text = "Enemy";
+                    pictureBoxPlayer.Image = Image.FromFile(directory + "\\Resources\\Tyler.png");
+                    labelInstruction.Text = "Attack his:";
                     this.StartPosition = FormStartPosition.Manual;
                     this.Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - 30, height);
-                    SwitchControls(this, new EventArgs());
                     break;
                 default:
                     break;
@@ -48,7 +57,7 @@ namespace Fight_Club
             {
                 chosenBodyPart = BodyPart.Torso;
             }
-            else 
+            else
             {
                 chosenBodyPart = BodyPart.Legs;
             }
