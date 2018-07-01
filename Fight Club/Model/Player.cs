@@ -12,7 +12,7 @@ namespace Fight_Club
         private const int DamageHealthPoints = 20;
 
         private BodyPart blocked;
-        private int healthPoints;
+        private int healthPoints = MaxHealth;
         private readonly string name;
         public int Id { get; }
 

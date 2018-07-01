@@ -8,7 +8,7 @@ namespace Fight_Club
 {
     class GameModel : IGameModel
     {
-        const int PlayersAmount=2;
+        const int PlayersAmount = 2;
 
         public IPlayer Player0 { get; }
         public IPlayer Player1 { get; }
@@ -21,12 +21,16 @@ namespace Fight_Club
         }
 
         public event EventHandler<GameModelEventArgs> Start;
-        public event EventHandler<GameModelEventArgs> NextTurn;
+        public event EventHandler<EventArgs> NextTurn;
 
         public void StartGame()
         {
             roundIndex = new Random().Next(0, PlayersAmount);
-            if (roundIndex%2==1) NextTurn?.Invoke(this, new GameModelEventArgs(roundIndex));
+            if (Player0.HealthPoints == Player.MaxHealth && Player1.HealthPoints == Player.MaxHealth &&
+                roundIndex % 2 == 1)
+                NextTurn?.Invoke(this, new EventArgs());
+            if (Player0.HealthPoints == 0 && roundIndex % 2 == 1) NextTurn?.Invoke(this, new EventArgs());
+            if (Player1.HealthPoints == 0 && roundIndex % 2 == 0) NextTurn?.Invoke(this, new EventArgs());
             Player0.HealthPoints = Player.MaxHealth;
             Player1.HealthPoints = Player.MaxHealth;
             Start?.Invoke(this, new GameModelEventArgs(roundIndex));
@@ -45,7 +49,7 @@ namespace Fight_Club
                 Player1.Blocked = Bot.choseBodyPart();
                 Player1.GetHit(bodyPart);
             }
-            NextTurn?.Invoke(this, new GameModelEventArgs(roundIndex));
+            NextTurn?.Invoke(this, new EventArgs());
         }
 
         public void AddObservers(IViewPlayer viewPlayer0, IViewPlayer viewPlayer1, IViewLog viewLog)

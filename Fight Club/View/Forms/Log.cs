@@ -55,5 +55,10 @@ namespace Fight_Club
         {
             richTextBoxLog.ScrollToCaret();
         }
+
+        private void Log_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
     }
 }

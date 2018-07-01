@@ -29,7 +29,7 @@ namespace Fight_Club
                 case 1:
                     this.StartPosition = FormStartPosition.Manual;
                     this.Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - 30, height);
-                    SwitchControls(this, new GameModelEventArgs(0));
+                    SwitchControls(this, new EventArgs());
                     break;
                 default:
                     break;
@@ -63,16 +63,12 @@ namespace Fight_Club
                 MessageBoxIcon.Question);
             if (result1 == DialogResult.Yes)
             {
-                ResetButtons();
                 controller.StartNewGame();
             }
-        }
-
-        private void ResetButtons()
-        {
-            buttonHead.Enabled = true;
-            buttonTorso.Enabled = true;
-            buttonLegs.Enabled = true;
+            else
+            {
+                this.Close();
+            }
         }
 
         public void LoadPlayerHealthPoints(object sender, PlayerEventArgs e)
@@ -81,7 +77,7 @@ namespace Fight_Club
             labelHpPlayer1.Text = "HP:" + e.HealthPoints;
         }
 
-        public void SwitchControls(object sender, GameModelEventArgs e)
+        public void SwitchControls(object sender, EventArgs e)
         {
             buttonHead.Enabled = buttonHead.Enabled != true;
             buttonTorso.Enabled = buttonTorso.Enabled != true;
@@ -95,7 +91,13 @@ namespace Fight_Club
 
         private void FormPlayer_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
+            else
+            {
+            }
         }
     }
 }
