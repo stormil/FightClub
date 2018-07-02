@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fight_Club
 {
-    class Controller: IControl
+    class Controller : IControl
     {
         private IViewPlayer viewPlayer1;
         private IViewPlayer viewPlayer2;
@@ -22,7 +22,7 @@ namespace Fight_Club
             viewPlayer1.SetController(this);
             viewPlayer2.SetController(this);
             viewLog.SetController(this);
-            gameModel.AddObservers(viewPlayer1,viewPlayer2,viewLog);
+            gameModel.AddObservers(viewPlayer1, viewPlayer2, viewLog);
             StartNewGame();
         }
 

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Fight_Club
 {
-    class Player: IPlayer
+    class Player : IPlayer
     {
         public const int MaxHealth = 100;
-        private const int DamageHealthPoints = 20;
+        public const int DamageHealthPoints = 20;
 
         private BodyPart blocked;
         private int healthPoints = MaxHealth;
         private readonly string name;
-        public int Id { get; }
+        private int Id { get; }
 
         public Player(string name, int id)
         {

@@ -20,12 +20,11 @@ namespace Fight_Club
         private void buttonStartFight_Click(object sender, EventArgs e)
         {
             if ((textBoxName.Text == "") || (textBoxName.Text == " ")) return;
-            //var formFightClub = new FormFightClub();
             var formLog = new Log();
             var formPlayer1 = new FormPlayer(0);
             var formPlayer2 = new FormPlayer(1);
-            IGameModel gameModel = new GameModel(textBoxName.Text);
-            IControl controller = new Controller(formPlayer1,formPlayer2, formLog, gameModel);
+            IControl controller = new Controller(formPlayer1, formPlayer2, formLog,
+                new GameModel(textBoxName.Text));
             formPlayer1.Show();
             formPlayer2.Show();
             formLog.Show();

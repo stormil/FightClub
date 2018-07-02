@@ -33,17 +33,19 @@ namespace Fight_Club
 
         public void WoundLog(object sender, PlayerEventArgs e)
         {
-            richTextBoxLog.AppendText(e.Name + " is wounded!\nNext player attacks... ");
+            richTextBoxLog.AppendText("Player #" + (e.Id + 1) + " " + e.Name + " gets -" +
+                                      Player.DamageHealthPoints + "HP damage!" +
+                                      "\nNext player attacks... ");
         }
 
         public void DeathLog(object sender, PlayerEventArgs e)
         {
-            richTextBoxLog.AppendText(e.Name + " is dead!\n");
+            richTextBoxLog.AppendText("Player #" + (e.Id + 1) + " " + e.Name + " is dead!\n");
         }
 
         public void BlockLog(object sender, PlayerEventArgs e)
         {
-            richTextBoxLog.AppendText(e.Name + " blocked the punch!\nNext player attacks... ");
+            richTextBoxLog.AppendText("Player #" + (e.Id+1) + " " + e.Name + " blocked the punch!\nNext player attacks... ");
         }
 
         public void SetController(IControl controller)
